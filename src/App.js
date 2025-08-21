@@ -1,42 +1,22 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import ToyContainer from "./ToyContainer";
+import ToyForm from "./ToyForm";
 
-import Header from './components/Header'
-import ToyForm from './components/ToyForm'
-import ToyContainer from './components/ToyContainer'
+function App() {
+  const [toys, setToys] = useState([]);
 
+  useEffect(() => {
+    fetch("http://localhost:3000/toys")
+      .then((r) => r.json())
+      .then((data) => setToys(data));
+  }, []);
 
-class App extends React.Component{
-
-  state = {
-    display: false
-  }
-
-  handleClick = () => {
-    let newBoolean = !this.state.display
-    this.setState({
-      display: newBoolean
-    })
-  }
-
-  render(){
-    return (
-      <>
-        <Header/>
-        { this.state.display
-            ?
-          <ToyForm/>
-            :
-          null
-        }
-        <div className="buttonContainer">
-          <button onClick={this.handleClick}> Add a Toy </button>
-        </div>
-        <ToyContainer/>
-      </>
-    );
-  }
-
+  return (
+    <div>
+      <ToyForm setToys={setToys} />
+      <ToyContainer toys={toys} setToys={setToys} />
+    </div>
+  );
 }
 
 export default App;

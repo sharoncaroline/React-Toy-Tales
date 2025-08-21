@@ -10,7 +10,7 @@ class ToyForm extends Component {
           <input type="text" name="name" placeholder="Enter a toy's name..." className="input-text"/>
           <br/>
           <input type="text" name="image" placeholder="Enter a toy's image URL..." className="input-text"/>
-          <br/>
+          <br/>  
           <input type="submit" name="submit" value="Create New Toy" className="submit"/>
         </form>
       </div>
